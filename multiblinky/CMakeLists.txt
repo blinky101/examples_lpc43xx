@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.5.0 FATAL_ERROR)
 
-set(CMAKE_TOOLCHAIN_FILE    ${CMAKE_SOURCE_DIR}/cmake/toolchain-gcc-arm-embedded.cmake)
+set(CMAKE_FILES ${CMAKE_SOURCE_DIR}/../cmake)
+set(CMAKE_TOOLCHAIN_FILE    ${CMAKE_FILES}/toolchain-gcc-arm-embedded.cmake)
 
 project(Multiblinky)
 
-include(${CMAKE_SOURCE_DIR}/cmake/CPM_setup.cmake)
+include(${CMAKE_FILES}/CPM_setup.cmake)
 
 
 #-----------------------------------------------------------------------

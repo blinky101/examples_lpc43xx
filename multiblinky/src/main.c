@@ -27,12 +27,14 @@ void SysTick_Handler(void)
 {
     GPIO_HAL_toggle(led_red);
     GPIO_HAL_toggle(led_blue);
-    if ((yellow_count++ % (yellow_count % 6)) == 0) {
+    if ((yellow_count % (yellow_count % 6)) == 0) {
         GPIO_HAL_toggle(led_yellow);
     }
-    if ((green_count++ % 5) == 0) {
+    yellow_count++;
+    if ((green_count % 5) == 0) {
         GPIO_HAL_toggle(led_green);
     }
+    green_count++;
 }
 
 
