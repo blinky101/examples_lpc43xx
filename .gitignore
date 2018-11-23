@@ -1,0 +1,9 @@
+*.swp
+build/
+tags
+config.cmake
+*.d
+*.o
+basic/*.bin
+basic/*.elf
+.DS_Store
