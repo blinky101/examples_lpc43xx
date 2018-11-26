@@ -1,0 +1,63 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // does not work yet
+        // {
+        //     "showDevDebugOutput": true,
+        //     "type": "cortex-debug",
+        //     "request": "attach",
+        //     "servertype": "openocd",
+        //     "cwd": "${workspaceRoot}",
+        //     "executable": "./build/blinky_m4",
+        //     "name": "Cortex Debug",
+        //     "device": "LPC43xx",
+        //     "configFiles": [
+        //         "interface/ftdi/jtag-lock-pick_tiny_2.cfg",
+        //         "./lpc4337_jtag.cfg"
+        //     ],
+        // },
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "bmp",
+            "cwd": "${workspaceRoot}",
+            "executable": "usb_rom_msc/build/USB_ROM_MSC",
+            "svdFile": "${workspaceRoot}/LPC43xx_43Sxx.svd",
+            "name": "USB_ROM_MSC (Black Magic Probe)",
+            "device": "LPC43xx",
+
+            // for MacOS: change to your specific black magic probe, see `bobbin info`
+            "BMPGDBSerialPort": "/dev/cu.usbmodemC1E497DE",
+
+            // for linux, use udev rule :
+            // `SUBSYSTEM=="tty", ATTRS{interface}=="Black Magic GDB Server", SYMLINK+="ttyBmpGdb"`
+            // "BMPGDBSerialPort": "/dev/ttyBmpGdb",
+
+            "targetId": 1,
+            "showDevDebugOutput": false,
+        },
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "bmp",
+            "cwd": "${workspaceRoot}",
+            "executable": "usb_fixed_rom_msc/build/USB_ROM_MSC",
+            "svdFile": "${workspaceRoot}/LPC43xx_43Sxx.svd",
+            "name": "USBD_FIXED_MSC (Black Magic Probe)",
+            "device": "LPC43xx",
+
+            // for MacOS: change to your specific black magic probe, see `bobbin info`
+            "BMPGDBSerialPort": "/dev/cu.usbmodemC1E497DE",
+
+            // for linux, use udev rule :
+            // `SUBSYSTEM=="tty", ATTRS{interface}=="Black Magic GDB Server", SYMLINK+="ttyBmpGdb"`
+            // "BMPGDBSerialPort": "/dev/ttyBmpGdb",
+
+            "targetId": 1,
+            "showDevDebugOutput": false,
+        }
+    ]
+}
