@@ -12,7 +12,8 @@ const uint32_t OscRateIn = 12000000;
 const uint32_t ExtRateIn = 0;
 
 static const NVICConfig NVIC_config[] = {
-    {SysTick_IRQn,       1},    // systick timer: high priority for now?
+    {TIMER2_IRQn,       1},     // Delay timer: should be correct in any context
+    {SysTick_IRQn,      2},     // systick timer: high priority for now?
 
     {SDIO_IRQn,         3},     // SD card: probably not timing sensitive
 };
