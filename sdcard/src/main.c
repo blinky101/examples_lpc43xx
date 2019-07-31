@@ -79,6 +79,9 @@ static void write_meta_files(unsigned int test_id,
     char fname[16];
     snprintf(fname, sizeof(fname), "times-%d.csv", test_id);
 
+    // delete previous results if any
+    sdcard_delete_file(fname);
+
     // assume iterations is a multiple of 8 for a bit more speed of this
     // naive implementation..
     for(size_t i=0;i<num_write_times;i+=8) {
