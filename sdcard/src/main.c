@@ -33,6 +33,7 @@ const GPIO *led_warn;
 #define TEST_3
 #define TEST_4
 #define TEST_5
+#define TEST_6
 
 // Enable to write a file with all latency numbers of each test.
 // NOTE: writing this file may take even longer than the tests themselves...
@@ -353,6 +354,62 @@ int main(void) {
         const uint64_t total_time = delay_calc_time_us(t_start, t_end) / 1000;
 
         write_meta_files(5, total_time, max_latency, g_write_times, iterations);
+    }
+#endif
+#ifdef TEST_6
+    {
+        // g_buffer: dummy data to write to sdcard file
+        const size_t sizeof_buffer = 2*1024;
+        const size_t iterations = 16*1024;
+
+        prepare_test();
+
+        // Perform write test in small blocks of data.
+        // File is opened, repeat(write data block, write to other file), file is closed
+        uint64_t max_latency = 0;
+        const uint64_t t_start = delay_get_timestamp();
+
+        sdcard_delete_file("test.txt");
+
+        // Open file
+        FIL file;
+        if(FR_OK != f_open(&file, "perf-6.bin", FA_WRITE | FA_CREATE_ALWAYS)) {
+            error();
+        }
+
+        for(size_t i=0;i<iterations;i++) {
+            const uint64_t t_pre = delay_get_timestamp();
+
+            // Write a block of data to file
+            UINT bw;
+            if(FR_OK != f_write(&file, g_buffer, sizeof_buffer, &bw)) {
+                error();
+            }
+
+            const uint64_t t_post = delay_get_timestamp();
+
+            // Calculate latency, saturate to UINT16_MAX to avoid overflow
+            uint32_t latency = (delay_calc_time_us(t_pre, t_post) / 1000);
+            latency = min(latency, UINT16_MAX);
+            g_write_times[i] = latency;
+
+            // Keep track of maximum time spent in one write
+            max_latency = max(max_latency, latency);
+
+
+            // Write a different file in between
+            const char dummy_data[] = "Hello World!\n";
+            sdcard_write_to_file("test.txt", dummy_data, strlen(dummy_data));
+        }
+
+        if(FR_OK != f_close(&file)) {
+            error();
+        }
+
+        const uint64_t t_end = delay_get_timestamp();
+        const uint64_t total_time = delay_calc_time_us(t_start, t_end) / 1000;
+
+        write_meta_files(6, total_time, max_latency, g_write_times, iterations);
     }
 #endif
 
