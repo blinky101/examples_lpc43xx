@@ -23,7 +23,7 @@ Copy the `config.cmake.example` file as `config.cmake` from the repository root 
 
 ## Build the firmware the first time
 
-Go into the project root (e.g. `multibllinky`) and create a directory 'build' and go into that directory
+Go into the project root (e.g. `multiblinky`) and create a directory 'build' and go into that directory
 
 ```bash
 cd multiblinky
