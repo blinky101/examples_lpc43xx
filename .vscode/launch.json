@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         // does not work yet
         // {
         //     "showDevDebugOutput": true,
@@ -30,7 +31,7 @@
             "device": "LPC43xx",
 
             // for MacOS: change to your specific black magic probe, see `bobbin info`
-            "BMPGDBSerialPort": "/dev/cu.usbmodemC1E497DE",
+            "BMPGDBSerialPort": "/dev/cu.usbmodemC1CC90EE1",
 
             // for linux, use udev rule :
             // `SUBSYSTEM=="tty", ATTRS{interface}=="Black Magic GDB Server", SYMLINK+="ttyBmpGdb"`
@@ -50,7 +51,27 @@
             "device": "LPC43xx",
 
             // for MacOS: change to your specific black magic probe, see `bobbin info`
-            "BMPGDBSerialPort": "/dev/cu.usbmodemC1E497DE",
+            "BMPGDBSerialPort": "/dev/cu.usbmodemC1CC90EE1",
+
+            // for linux, use udev rule :
+            // `SUBSYSTEM=="tty", ATTRS{interface}=="Black Magic GDB Server", SYMLINK+="ttyBmpGdb"`
+            // "BMPGDBSerialPort": "/dev/ttyBmpGdb",
+
+            "targetId": 1,
+            "showDevDebugOutput": false,
+        },
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "bmp",
+            "cwd": "${workspaceRoot}",
+            "executable": "SWO/build/SWO",
+            "svdFile": "${workspaceRoot}/LPC43xx_43Sxx.svd",
+            "name": "SWO",
+            "device": "LPC43xx",
+
+            // for MacOS: change to your specific black magic probe, see `bobbin info`
+            "BMPGDBSerialPort": "/dev/cu.usbmodemC1CC90EE1",
 
             // for linux, use udev rule :
             // `SUBSYSTEM=="tty", ATTRS{interface}=="Black Magic GDB Server", SYMLINK+="ttyBmpGdb"`
