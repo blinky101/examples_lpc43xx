@@ -1,5 +1,7 @@
 # LPC43xx example projects
 
+![](images/lpc43xx_board.jpg)
+
 This repository contains some examples for the LPC43xx microcontroller. These projects are based on the blinky project covered by [this blinky tutorial](https://blinky101.github.io/blinky_lpc43xx/). The project folders also have a readme file.
 
 For flashing you will need either:
